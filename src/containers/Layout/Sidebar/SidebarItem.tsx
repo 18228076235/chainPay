@@ -1,22 +1,22 @@
 /** @format */
 
-import React, { SFC, useEffect } from 'react';
-import { useRouter } from 'hooks';
-import QUIcon from 'components/QUIcon';
+import React, { SFC, useEffect } from 'react'
+import { useRouter } from 'hooks'
+import QUIcon from 'components/QUIcon'
 export interface ISidebarItem {
-  url: string;
-  title: string;
-  icon: string;
+  url: string
+  title: string
+  icon?: string
 }
-const SidebarItem: SFC<ISidebarItem> = ({ url, title, icon }) => {
-  const { history, location } = useRouter();
+const SidebarItem: SFC<ISidebarItem> = ({ url, title }) => {
+  const { history, location } = useRouter()
   function getPath(url: string) {
-    return url.split('/')[2];
+    return url.split('/')[2]
   }
 
   const jumpRouter = () => {
-    history.push(url);
-  };
+    history.push(url)
+  }
   return (
     <div
       className={
@@ -26,9 +26,8 @@ const SidebarItem: SFC<ISidebarItem> = ({ url, title, icon }) => {
       }
       onClick={jumpRouter}
     >
-      <QUIcon className={`iconfont fs-24`} icon={`${icon}`} />
       <span>{title}</span>
     </div>
-  );
-};
-export default SidebarItem;
+  )
+}
+export default SidebarItem

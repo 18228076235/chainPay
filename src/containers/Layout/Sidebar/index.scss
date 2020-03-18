@@ -1,60 +1,53 @@
 @import 'style/color.scss';
 @each $key, $value in $theme-color {
   .ngLayout_sidebar-#{$key} {
-    position: relative;
-    z-index: 10001;
-    width: 60px;
-    // background-color: map-get($value, side-bar-color);
-    background: linear-gradient(
-      0deg,
-      rgba(26, 42, 61, 1),
-      rgba(80, 102, 133, 1)
-    );
+    width: 100%;
+    border-bottom: 1px #eeeeee solid;
+    background-color: rgba(255, 255, 255, 0.9);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 40px;
+    height: 80px;
     .ngLayout_logo {
       display: block;
       height: 60px;
       width: 60px;
     }
     user-select: none;
-    position: fixed;
-    height: 100%;
     .sidebar_item {
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       position: relative;
-      font-size: 12px;
+      font-size: 14px;
       cursor: pointer;
-      padding-top: 9px;
-      padding-bottom: 9px;
-      margin: 5px 0;
-      color: rgba($color: #fff, $alpha: 0.7);
+      padding: 0 20px;
       &:hover,
       &-hover,
       &-active {
         background: linear-gradient(
-          90deg,
-          rgba(82, 197, 255, 0.16),
-          rgba(82, 197, 255, 0.04)
+          rgba(82, 197, 255, 0.04),
+          rgba(82, 197, 255, 0.16)
         );
-        color: #fff;
         position: relative;
       }
-      &-active:before {
+      &-active::after {
         content: '';
         position: absolute;
-        height: 100%;
-        width: 4px;
+        height: 2px;
+        width: 100%;
         background: #52c5f2;
-        top: 0;
+        bottom: 0;
         left: 0;
       }
     }
     .sidebar_item_logo {
-      position: relative;
-      display: inline-block;
-      width: 100%;
+      img {
+        height: 50px;
+      }
+      align-items: center;
       cursor: pointer;
       text-align: center;
       color: rgba($color: #fff, $alpha: 0.3);
@@ -85,10 +78,10 @@
   }
 
   .userInfo {
-    position: absolute;
     width: 60px;
     height: 60px;
     bottom: 50px;
+    margin-left: 80px;
     &_popover {
       color: #32375a;
       text-align: left;
@@ -112,7 +105,7 @@
       }
       .username {
         padding-top: 4px;
-        color: #fff;
+        color: #077fb6;
         display: inline-block;
         width: 60px;
         font-size: 12px;

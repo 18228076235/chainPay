@@ -1,29 +1,33 @@
-import React, { SFC, memo } from 'react';
-import SidebarItem from './SidebarItem';
-import UserInfo from './UserInfo';
+import React, { SFC, memo } from 'react'
+import SidebarItem from './SidebarItem'
+import UserInfo from './UserInfo'
 const menuList = [
   {
     url: '/app/ModelLibrary',
-    title: '模型库',
-    icon: 'icon-d'
+    title: '首页'
   },
   {
-    url: '/app/account',
-    title: '账户管理',
-    icon: 'icon-zhanghuguanli'
+    url: '/app/Document',
+    title: '开发者文档'
+  },
+  {
+    url: '/app/Guide',
+    title: '入门指南'
+  },
+  {
+    url: '/app/Question',
+    title: '常见问题'
   }
-];
+]
 const SidebarList: SFC = () => {
   return (
     <React.Fragment>
       {menuList.map(item => (
-        <div key={item.url}>
-          <SidebarItem {...item} />
-        </div>
+        <SidebarItem {...item} key={item.url} />
       ))}
       <UserInfo />
     </React.Fragment>
-  );
-};
+  )
+}
 
-export default SidebarList;
+export default SidebarList

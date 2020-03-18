@@ -1,17 +1,17 @@
-import React, { FC, useState } from 'react';
-import Sidebar from './Sidebar';
-import { LayoutRouter } from 'router';
-import './index.scss';
+import React, { FC, useState } from 'react'
+import Sidebar from './Sidebar'
+import { LayoutRouter } from 'router'
+import './index.scss'
 
 const NGLayout: FC = () => {
   return (
-    <div className="flex ngLayout">
+    <div className="ngLayout">
       <Sidebar />
       <section className="ngLayout_section">
         <LayoutRouter />
       </section>
     </div>
-  );
-};
+  )
+}
 
-export default NGLayout;
+export default NGLayout

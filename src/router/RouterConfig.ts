@@ -1,25 +1,16 @@
-import React from 'react';
-import Loadable from 'react-loadable';
+import React from 'react'
+import Loadable from 'react-loadable'
 export interface IRouterItem {
-  key: string;
-  name: string;
-  path: string;
+  key: string
+  name: string
+  path: string
   component:
     | (React.ComponentClass<{}, any> & Loadable.LoadableComponent)
-    | (React.FunctionComponent<{}> & Loadable.LoadableComponent);
-  childs?: IRouterItem[];
+    | (React.FunctionComponent<{}> & Loadable.LoadableComponent)
+  childs?: IRouterItem[]
 }
 
 const RouterConfigs: any[] = [
-  {
-    key: 'true',
-    name: '页面B',
-    path: '/app/account',
-    component: Loadable({
-      loader: () => import('pages/Account'),
-      loading: () => null
-    })
-  },
   {
     key: 'true',
     name: '模型库',
@@ -57,14 +48,6 @@ const RouterConfigs: any[] = [
       loader: () => import('pages/Login'),
       loading: () => null
     })
-  },
-  {
-    name: '11',
-    path: '/app/a',
-    component: Loadable({
-      loader: () => import('pages/A'),
-      loading: () => null
-    })
   }
-];
-export default RouterConfigs;
+]
+export default RouterConfigs
