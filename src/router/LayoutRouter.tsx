@@ -1,6 +1,6 @@
-import React from 'react';
-import { HashRouter as Router, Route, Switch } from 'react-router-dom';
-import RouterConfig, { IRouterItem } from './RouterConfig';
+import React from 'react'
+import { HashRouter as Router, Route, Switch } from 'react-router-dom'
+import RouterConfig, { IRouterItem } from './RouterConfig'
 export default function Routes() {
   return (
     <Router>
@@ -13,11 +13,11 @@ export default function Routes() {
               path={item.path}
               component={item.component}
             />
-          ];
-          if (item.childs) {
+          ]
+          if (item.children) {
             return [
               ...route,
-              ...item.childs.map(child => (
+              ...item.children.map(child => (
                 <Route
                   key={child.path}
                   exact={true}
@@ -25,12 +25,12 @@ export default function Routes() {
                   component={child.component}
                 />
               ))
-            ];
+            ]
           }
 
-          return route;
+          return route
         })}
       </Switch>
     </Router>
-  );
+  )
 }

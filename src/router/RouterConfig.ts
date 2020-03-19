@@ -19,7 +19,17 @@ const RouterConfigs: any[] = [
       loader: () => import('pages/HomePage'),
       loading: () => null
     }),
-    children: []
+    children: [
+      {
+        key: 'true',
+        name: '配置',
+        path: '/app/HomePage/ConfigPage',
+        component: Loadable({
+          loader: () => import('pages/HomePage/ConfigPage'),
+          loading: () => null
+        })
+      }
+    ]
   },
   {
     name: '登陆',

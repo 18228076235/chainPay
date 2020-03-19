@@ -9,21 +9,13 @@ import QUNoData from 'components/QUNoData'
 
 const HomePage = (props: RouteComponentProps) => {
   const { HomePageStore } = useStore()
-  const { DrawerStore, ListStore } = HomePageStore
 
-  function goToPage(id: string) {
-    props.history.push(`/app/HomePage/ModelCompared/${id}`)
+  function goToPage() {
+    props.history.push(`/app/HomePage/ConfigPage`)
   }
 
-  useMount(() => {
-    ListStore.customerManage()
-  })
-  useUnmount(() => {
-    ListStore.resetStore()
-  })
-  const getUserInfo = (e: any) => {
-    ListStore.changeUserInfo(e.target.value)
-  }
+  useMount(() => {})
+  useUnmount(() => {})
 
   return (
     <div className="home m-16 16 0 16">
@@ -31,7 +23,7 @@ const HomePage = (props: RouteComponentProps) => {
         <Card
           className="mr-20 flex_2"
           title={<b>我的应用</b>}
-          extra={<Button>创建应用</Button>}
+          extra={<Button onClick={goToPage}>创建应用</Button>}
         >
           <QUNoData text="" />
         </Card>
