@@ -3,7 +3,7 @@ import SidebarItem from './SidebarItem'
 import UserInfo from './UserInfo'
 const menuList = [
   {
-    url: '/app/ModelLibrary',
+    url: '/app/HomePage',
     title: '首页'
   },
   {

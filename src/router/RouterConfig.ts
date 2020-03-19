@@ -7,39 +7,19 @@ export interface IRouterItem {
   component:
     | (React.ComponentClass<{}, any> & Loadable.LoadableComponent)
     | (React.FunctionComponent<{}> & Loadable.LoadableComponent)
-  childs?: IRouterItem[]
+  children?: IRouterItem[]
 }
 
 const RouterConfigs: any[] = [
   {
     key: 'true',
-    name: '模型库',
-    path: '/app/ModelLibrary',
+    name: '首页',
+    path: '/app/HomePage',
     component: Loadable({
-      loader: () => import('pages/ModelLibrary'),
+      loader: () => import('pages/HomePage'),
       loading: () => null
     }),
-    childs: [
-      {
-        key: 'true',
-        name: '模型编辑',
-        path: '/app/ModelLibrary/ModelEdit',
-        component: Loadable({
-          loader: () => import('pages/ModelLibrary/ModelEdit'),
-          loading: () => null
-        })
-      },
-      {
-        key: 'true',
-        name: '模型对比',
-        path:
-          '/app/ModelLibrary/ModelCompared/:customId/:comparedId?/:isDetail?',
-        component: Loadable({
-          loader: () => import('pages/ModelLibrary/ModelCompared'),
-          loading: () => null
-        })
-      }
-    ]
+    children: []
   },
   {
     name: '登陆',

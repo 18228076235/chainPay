@@ -1,18 +1,12 @@
-import LoginStore, { ILoginStore } from './Login';
-import ModelLibraryStore, { IModelLibrary } from './ModelLibrary';
-import AccountStore, { IAccountStore } from './Account';
-import ModelComparedStore, { IModelComparedStore } from './ModelCompared';
+import LoginStore, { ILoginStore } from './Login'
+import AccountStore, { IAccountStore } from './Account'
 
 export default {
   LoginStore,
-  AccountStore,
-  ModelLibraryStore,
-  ModelComparedStore
-};
+  AccountStore
+}
 
 export interface IStore {
-  LoginStore: ILoginStore;
-  AccountStore: IAccountStore;
-  ModelLibraryStore: IModelLibrary;
-  ModelComparedStore: IModelComparedStore;
+  LoginStore: ILoginStore
+  AccountStore: IAccountStore
 }

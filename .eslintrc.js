@@ -1,12 +1,12 @@
 module.exports = {
   parser: '@typescript-eslint/parser',
   plugins: ['@typescript-eslint', 'react-hooks'],
-  extends: [
-    'plugin:@typescript-eslint/recommended',
-    'plugin:react/recommended',
-    'prettier/@typescript-eslint',
-    'plugin:prettier/recommended'
-  ],
+  // extends: [
+  //   'plugin:@typescript-eslint/recommended',
+  //   'plugin:react/recommended',
+  //   'prettier/@typescript-eslint',
+  //   'plugin:prettier/recommended'
+  // ],
   settings: {
     react: {
       pragma: 'React',
@@ -44,4 +44,4 @@ module.exports = {
     browser: true,
     node: true
   }
-};
+}
