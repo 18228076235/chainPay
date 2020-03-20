@@ -1,11 +1,10 @@
 /*
- * @Author: shiyao you 
- * @Date: 2019-11-26 17:28:17 
- * @Last Modified by: shiyao you
- * @Last Modified time: 2019-11-27 19:26:55
+ * @Author: qiuying 
+ * @Date: 2020-03-20 17:20:42 
+ * @Last Modified by:   qiuying 
+ * @Last Modified time: 2020-03-20 17:20:42 
  */
 .modal {
-  width: 522px !important;
   .modal_parent {
     background: #ffffff;
     padding: 20px 28px;
@@ -43,9 +42,7 @@
       line-height: 24px;
     }
     &_item {
-      &_input {
-        width: 200px;
-      }
+      width: 100%;
     }
   }
 }

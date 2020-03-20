@@ -1,12 +1,12 @@
 module.exports = {
   parser: '@typescript-eslint/parser',
   plugins: ['@typescript-eslint', 'react-hooks'],
-  // extends: [
-  //   'plugin:@typescript-eslint/recommended',
-  //   'plugin:react/recommended',
-  //   'prettier/@typescript-eslint',
-  //   'plugin:prettier/recommended'
-  // ],
+  extends: [
+    'plugin:@typescript-eslint/recommended',
+    // 'plugin:react/recommended',
+    'prettier/@typescript-eslint'
+    // 'plugin:prettier/recommended'
+  ],
   settings: {
     react: {
       pragma: 'React',
@@ -33,7 +33,7 @@ module.exports = {
     'no-console': [1, { allow: ['warn', 'error'] }]
   },
   parserOptions: {
-    ecmaVersion: 2019,
+    ecmaVersion: 2020,
     sourceType: 'module',
     ecmaFeatures: {
       jsx: true

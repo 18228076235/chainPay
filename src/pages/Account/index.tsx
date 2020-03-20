@@ -1,57 +1,55 @@
 /*
  * @Author: shiyao you
  * @Date: 2019-11-25 17:35:59
- * @Last Modified by: shiyao you
- * @Last Modified time: 2019-12-04 11:41:40
+ * @Last Modified by: qiuying
+ * @Last Modified time: 2020-03-20 18:28:24
  */
 
-import React, { useState } from 'react';
-import { Table, Button, Input, Modal } from 'antd';
-import AccountModal from './Components/Modal';
-import EditPwdModal from 'components/QUPasswordModal';
-import useMount from 'hooks/useMount';
-import { useStore, useObserver } from 'store/utils';
-import './index.scss';
-const { confirm } = Modal;
+import React, { useState } from 'react'
+import { Table, Button, Input, Modal } from 'antd'
+import useMount from 'hooks/useMount'
+import { useStore, useObserver } from 'store/utils'
+import './index.scss'
+const { confirm } = Modal
 /**
  * 账户管理页面
  */
 export default function Account() {
-  const [visible, setVisible] = useState(false);
-  const { AccountStore } = useStore();
-  const [isAdd, setIsAdd] = useState(true);
-  const [search, setSearch] = useState('');
-  let [formData, setFormData] = useState({});
-  const [visiblePwd, setVisiblePwd] = useState(false);
-  const [formDataPwd, setFormDataPwd] = useState({});
+  const [visible, setVisible] = useState(false)
+  const { AccountStore } = useStore()
+  const [isAdd, setIsAdd] = useState(true)
+  const [search, setSearch] = useState('')
+  let [formData, setFormData] = useState({})
+  const [visiblePwd, setVisiblePwd] = useState(false)
+  const [formDataPwd, setFormDataPwd] = useState({})
   /**
    * 显示modal
    */
   const showModal = (row?: any) => {
     if (row) {
-      setFormData({ ...row });
+      setFormData({ ...row })
     }
-    setVisible(true);
-  };
+    setVisible(true)
+  }
   const handleClose = () => {
-    setVisible(false);
-  };
+    setVisible(false)
+  }
   const handleOk = () => {
-    handleClose();
-  };
+    handleClose()
+  }
   const handleChange = (row: any) => {
-    setIsAdd(false);
-    showModal(row);
-  };
+    setIsAdd(false)
+    showModal(row)
+  }
 
   const showAddModal = () => {
-    setIsAdd(true);
-    showModal();
-  };
+    setIsAdd(true)
+    showModal()
+  }
 
   const handleClosePwd = () => {
-    setVisiblePwd(false);
-  };
+    setVisiblePwd(false)
+  }
 
   /**
    * 页码变化
@@ -59,19 +57,18 @@ export default function Account() {
    * @param pageSize 每页显示的条数
    */
   const changePageSize = (current: number, pageSize: number) => {
-    AccountStore.setPage(current, pageSize);
-    AccountStore.getAllUsers(current, pageSize, AccountStore.search);
-  };
+    AccountStore.setPage(current, pageSize)
+    AccountStore.getAllUsers(current, pageSize, AccountStore.search)
+  }
 
   const onShowSizeChange = (current: number, pageSize: number) => {
-    AccountStore.setPage(current, pageSize);
-    AccountStore.getAllUsers(current, pageSize, AccountStore.search);
-  };
+    AccountStore.setPage(current, pageSize)
+    AccountStore.getAllUsers(current, pageSize, AccountStore.search)
+  }
   const showPwdModal = (row: any) => {
-    // console.log(row)
-    setVisiblePwd(true);
-    setFormDataPwd({ ...row });
-  };
+    setVisiblePwd(true)
+    setFormDataPwd({ ...row })
+  }
 
   const showDeleteModal = (id: any) => {
     confirm({
@@ -82,13 +79,13 @@ export default function Account() {
       centered: true,
       onOk() {
         return new Promise(async (resolve, reject) => {
-          await AccountStore.deleteUser(id);
-          resolve();
-        });
+          await AccountStore.deleteUser(id)
+          resolve()
+        })
       },
       onCancel() {}
-    });
-  };
+    })
+  }
 
   // 定义列
   const columns: any = [
@@ -155,11 +152,11 @@ export default function Account() {
         </div>
       )
     }
-  ];
+  ]
 
   const rowClass: any = (record: any, index: any): any => {
-    return index % 2 === 0 ? 'account_table_double' : 'account_table_single';
-  };
+    return index % 2 === 0 ? 'account_table_double' : 'account_table_single'
+  }
   const pagination = {
     // 默认当前页，每页显示数量，总数
     current: AccountStore.index,
@@ -171,17 +168,16 @@ export default function Account() {
     showTotal: (total: number) => `共 ${total} 条`,
     onChange: changePageSize,
     onShowSizeChange: onShowSizeChange
-  };
+  }
 
   const handleSearch = async () => {
-    // console.log(search);
-    AccountStore.setInfo(search);
+    AccountStore.setInfo(search)
     await AccountStore.getAllUsers(
       AccountStore.index,
       AccountStore.size,
       AccountStore.search
-    );
-  };
+    )
+  }
   /**
    * 初始化
    */
@@ -190,24 +186,10 @@ export default function Account() {
       AccountStore.index,
       AccountStore.size,
       AccountStore.search
-    );
-
-    // console.log(AccountStore.data);
-  });
+    )
+  })
   return useObserver(() => (
     <div className="account m-16">
-      <AccountModal
-        visible={visible}
-        handleClose={handleClose}
-        handleOk={handleOk}
-        isAdd={isAdd}
-        formData={formData}
-      />
-      <EditPwdModal
-        visible={visiblePwd}
-        handleClose={handleClosePwd}
-        formData={formDataPwd}
-      />
       <div className="flex_sb account_tool">
         <div className="account_input ml-24">
           <span className="mr-8 account_input_title">姓名/电话/工号</span>
@@ -236,5 +218,5 @@ export default function Account() {
         pagination={pagination}
       ></Table>
     </div>
-  ));
+  ))
 }

@@ -4,8 +4,8 @@
  * @format
  * @Author: hanlike
  * @Date: 2018-09-04 16:51:18
- * @Last Modified by: shiyao you
- * @Last Modified time: 2019-11-27 17:52:07
+ * @Last Modified by: qiuying
+ * @Last Modified time: 2020-03-20 18:28:16
  */
 
 import axios, {
@@ -13,10 +13,10 @@ import axios, {
   AxiosError,
   AxiosInstance,
   AxiosRequestConfig
-} from 'axios';
-import { message } from 'antd';
-import { once } from 'lodash-es';
-import AppAssistant from './AppAssistant';
+} from 'axios'
+import { message } from 'antd'
+import { once } from 'lodash-es'
+import AppAssistant from './AppAssistant'
 enum ECode {
   OPERATION_SUCCESS = 10000, // "操作成功"
   GAIN_SUCCESS = 10001, // "成功获取数据，数据非空"
@@ -33,86 +33,85 @@ enum ECode {
 }
 
 export interface IApiData {
-  data: any;
-  code: ECode;
-  msg: string;
+  data: any
+  code: ECode
+  msg: string
 }
 interface IData extends AxiosResponse {
-  data: IApiData;
+  data: IApiData
 }
 const onceExit = once(() => {
-  localStorage.removeItem('token');
-  window.location.replace(`${location.origin}`);
-});
+  localStorage.removeItem('token')
+  window.location.replace(`${location.origin}`)
+})
 const requestInterceptor = (config: AxiosRequestConfig) => {
-  config.headers.Authorization = localStorage.getItem('token') || '';
-  return config;
-};
-const requestInterceptorError = (err: AxiosError) => err;
-const responseInterceptor = (response: AxiosResponse) => response;
+  config.headers.Authorization = localStorage.getItem('token') || ''
+  return config
+}
+const requestInterceptorError = (err: AxiosError) => err
+const responseInterceptor = (response: AxiosResponse) => response
 const responseInterceptorError = (err: AxiosError) => {
   if (err.response) {
     switch (err.response.status) {
       case 400:
-        message.error(err.response.data.msg || '参数错误');
-        break;
+        message.error(err.response.data.msg || '参数错误')
+        break
       case 401:
-        message.error(err.response.data.msg || '权限错误');
+        message.error(err.response.data.msg || '权限错误')
         setTimeout(() => {
-          onceExit();
-        }, 1500);
-        break;
+          onceExit()
+        }, 1500)
+        break
       case 500:
-        message.error(err.response.data.msg || '异常');
-        break;
+        message.error(err.response.data.msg || '异常')
+        break
       default:
-        break;
+        break
     }
-    return Promise.reject(err);
+    return Promise.reject(err)
   }
-  return Promise.reject(err);
-};
+  return Promise.reject(err)
+}
 class Http {
-  private static instance: Http;
-  private session: AxiosInstance;
+  private static instance: Http
+  private session: AxiosInstance
 
   private constructor() {
     const options = {
       baseURL: 'http://47.106.248.183:8033' || '',
       timeout: 60000
-    };
-    // console.log(options.baseURL);
-    this.session = axios.create(options);
+    }
+    this.session = axios.create(options)
     this.session.interceptors.request.use(
       requestInterceptor,
       requestInterceptorError
-    );
+    )
     this.session.interceptors.response.use(
       responseInterceptor,
       responseInterceptorError
-    );
+    )
   }
   static getInstance() {
     if (!Http.instance) {
-      Http.instance = new Http();
+      Http.instance = new Http()
     }
-    return Http.instance;
+    return Http.instance
   }
   checkResponse(response: IData): Promise<IApiData> {
     return new Promise((resolve, reject) => {
-      const { data } = response;
-      const { code, msg } = data;
+      const { data } = response
+      const { code, msg } = data
       if (
         code !== ECode.OPERATION_SUCCESS &&
         code !== ECode.GAIN_SUCCESS &&
         code !== ECode.GAIN_SUCCESS_EMPTY
       ) {
         /// TODO: 后面改成自定义提示控件
-        message.warning(msg);
-        return reject({ code, msg });
+        message.warning(msg)
+        return reject({ code, msg })
       }
-      return resolve(data);
-    });
+      return resolve(data)
+    })
   }
   /**
    * get方法
@@ -123,8 +122,8 @@ class Http {
     return this.session(
       Object.assign({ method: 'get', url: api }, params)
     ).then((response: IData) => {
-      return this.checkResponse(response);
-    });
+      return this.checkResponse(response)
+    })
   }
 
   /**
@@ -136,8 +135,8 @@ class Http {
     return this.session(
       Object.assign({ method: 'post', url: api }, params)
     ).then((response: IData) => {
-      return this.checkResponse(response);
-    });
+      return this.checkResponse(response)
+    })
   }
 
   /**
@@ -148,8 +147,8 @@ class Http {
     return this.session(
       Object.assign({ method: 'delete', url: api }, params)
     ).then((response: IData) => {
-      return this.checkResponse(response);
-    });
+      return this.checkResponse(response)
+    })
   }
 
   /**
@@ -161,9 +160,9 @@ class Http {
     return this.session(
       Object.assign({ method: 'put', url: api }, params)
     ).then((response: IData) => {
-      return this.checkResponse(response);
-    });
+      return this.checkResponse(response)
+    })
   }
 }
 
-export default Http;
+export default Http

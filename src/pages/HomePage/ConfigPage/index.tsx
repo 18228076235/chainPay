@@ -41,13 +41,13 @@ const ConfigPage = (props: RouteComponentProps) => {
   useUnmount(() => {})
 
   return (
-    <div>
-      <Steps current={current}>
+    <div className="config_page">
+      <Steps current={current} type="navigation">
         {steps.map(item => (
           <Step key={item.title} title={item.title} />
         ))}
       </Steps>
-      <div className="steps-content">{steps[current]?.content}</div>
+      <div className="steps_content">{steps[current]?.content}</div>
     </div>
   )
 }

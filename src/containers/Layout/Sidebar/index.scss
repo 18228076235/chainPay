@@ -28,8 +28,8 @@
       &-hover,
       &-active {
         background: linear-gradient(
-          rgba(82, 197, 255, 0.04),
-          rgba(82, 197, 255, 0.16)
+          rgba($main-button-color, 0.04),
+          rgba($main-button-color, 0.16)
         );
         position: relative;
       }
@@ -38,7 +38,7 @@
         position: absolute;
         height: 2px;
         width: 100%;
-        background: #52c5f2;
+        background: $main-button-color;
         bottom: 0;
         left: 0;
       }
@@ -105,7 +105,7 @@
       }
       .username {
         padding-top: 4px;
-        color: #077fb6;
+        color: $main-button-color;
         display: inline-block;
         width: 60px;
         font-size: 12px;

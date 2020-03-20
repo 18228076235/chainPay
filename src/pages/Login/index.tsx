@@ -1,61 +1,61 @@
 /** @format */
 
-import React, { useCallback, memo, useEffect } from 'react';
-import { useStore, useObserver } from 'store/utils';
-import { RouteComponentProps } from 'react-router';
-import Particles from 'react-particles-js';
-import QUApplicationControl from 'components/QUApplicationControl';
-import UsernnameInput from './Components/UserInput';
-import PasswordInput from './Components/UserInput';
-import SubmitButton from './Components/SubmitButton';
-import Remember from './Components/Remember';
+import React, { useCallback, memo, useEffect } from 'react'
+import { useStore, useObserver } from 'store/utils'
+import { RouteComponentProps } from 'react-router'
+import Particles from 'react-particles-js'
+import QUApplicationControl from 'components/QUApplicationControl'
+import UsernnameInput from './Components/UserInput'
+import PasswordInput from './Components/UserInput'
+import SubmitButton from './Components/SubmitButton'
+import Remember from './Components/Remember'
 
-import './index.scss';
+import './index.scss'
 
 interface ILoginProps extends RouteComponentProps {
-  onSetLoginInfo: (data: any) => void;
-  api_url: string;
+  onSetLoginInfo: (data: any) => void
+  api_url: string
 }
 
 const Login = (props: ILoginProps) => {
-  const { LoginStore } = useStore();
+  const { LoginStore } = useStore()
 
   useEffect(() => {
-    const rememberAccount = localStorage.getItem('account');
+    const rememberAccount = localStorage.getItem('account')
     if (rememberAccount) {
-      LoginStore.changeInput('account', rememberAccount);
-      LoginStore.changeRemember(true);
+      LoginStore.changeInput('account', rememberAccount)
+      LoginStore.changeRemember(true)
     }
-  }, []);
+  }, [])
 
   const handleSubmit = useCallback(async () => {
-    if (LoginStore.isLoading) return;
-    const { username, password } = LoginStore;
+    if (LoginStore.isLoading) return
+    const { username, password } = LoginStore
     if (username.length < 2) {
       LoginStore.changeError({
         type: 'account',
         message: '你输入的信息长度不够'
-      });
-      return;
+      })
+      return
     }
     if (password.length < 2) {
       LoginStore.changeError({
         type: 'password',
         message: '你输入的信息长度不够'
-      });
-      return;
+      })
+      return
     }
-    LoginStore.changeLoading(true);
+    LoginStore.changeLoading(true)
 
     await LoginStore.callLogin(() => {
-      props.history.replace('/');
-    });
+      props.history.replace('/')
+    })
   }, [
     LoginStore.username,
     LoginStore.password,
     LoginStore.isLoading,
     props.api_url
-  ]);
+  ])
 
   return useObserver(() => (
     <div className="login">
@@ -70,10 +70,10 @@ const Login = (props: ILoginProps) => {
               value: 1
             },
             color: {
-              value: '#52c5ff'
+              value: '#598fe8'
             },
             line_linked: {
-              color: '#52c5ff'
+              color: '#598fe8'
             }
           },
           interactivity: {
@@ -121,7 +121,7 @@ const Login = (props: ILoginProps) => {
         </div>
       </div>
     </div>
-  ));
-};
+  ))
+}
 
-export default memo(Login);
+export default memo(Login)
